@@ -1,5 +1,4 @@
 import numpy as np
-
 # 1.  데이터 
 x_train = np.array([1,2,3,4,5,6,7,8,9,10]) 
 y_train = np.array([1,2,3,4,5,6,7,8,9,10])  
@@ -11,10 +10,11 @@ x_pred = np.array([16,17,18]) #수능
 # train-훈련시킬데이터 
 # test-평가할데이터 
 # pred-예측할데이터(y을 알고싶기 때문에 y값이 없음) 암묵적인 약속
+
+# 2. 모델 구성 
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Dense 
 
-# 2. 모델 구성 
 model = Sequential() # 순차적
 model.add(Dense(5, input_dim=100)) # 한 개 입력 
 model.add(Dense(3))
@@ -28,11 +28,12 @@ model.add(Dense(1)) # 결과 Weight
 # 3. 컴파일, 훈련 
 model.compile(loss='mse', optimizer='adam', metrics=['mae']) 
    # mse(Mean Square Error) = 손실함수는 정답에 대한 오류를 숫자로 나타내는 것
-   # 예측값과 정답값의 차이값을 제곱하여, 그 값들을 전부 더하고, 개수로 나누어 평균을 낸 것입니다.
-   # square라는 제곱의 영문명으로 보았을 때, 말 그대로 차이를 면적으로 나타낸 것이죠.
-   # 제곱을 하기에 값이 뻥튀기되어 특이치에 취약해지고, mae와 마찬가지로 방향성이 상실되는것은 마찬가지
+   # mse(Mean Square Error) = 손실함수는 정답에 대한 오류를 숫자로 나타내는 것
+   # 예측값과 정답값의 차이값을 제곱하여, 그 값들을 전부 더하고, 개수로 나누어 평균을 낸 것
+   # square라는 제곱의 영문명으로 보면 말 그대로 차이를 면적으로 나타낸 것
+   # 제곱을 하기에 값이 높아져서?부풀어져 x, mae와 마찬가지로 방향성이 상실되는것은 마찬가지
    # 오답에 가까울수록 큰 값이 나옴. 반대로 정답에 가까울수록 작은 값이 나옴
-   # Optimizer(최적화) = adam ,Metrics = 평가 지표 (mse, mae, acc)
+   # Optimizer(최적화) = adam ,Metrics = 평가 지표 
 #model.fit(x, y, epochs=100, batch_size=1) 
 model.fit(x_train, y_train, epochs=1) 
    # epochs = 훈련 횟수 

@@ -9,17 +9,16 @@ y_val = np.array([11,12,13,14,15])
 x_test = np.array([16,17,18,19,20])
 y_test = np.array([16,17,18,19,20])
 
+# 2. 모델 구성 
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Dense 
 
-# 2. 모델 구성 
 model = Sequential()
 model.add(Dense(30, input_dim=1))
 model.add(Dense(50))
 model.add(Dense(30))
 model.add(Dense(7))
 model.add(Dense(1))
-
 
 # 3. 컴파일, 훈련 
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
@@ -41,12 +40,12 @@ y_predict = model.predict(x_test) # 평가지표 나올 때 predict를 통과해
 print("결과물 : \n : ",y_predict)
 
 # 실습, 결과물 오차 수집, 미세조절
-
+#RMSE
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict):
     return np.sqrt(mean_squared_error(y_test, y_predict))
 print("RMSE : ", RMSE(y_test, y_predict))
-
+#R2
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)
-print("R2 : ",r2)
+print("ㄱ2 : ",r2)

@@ -1,39 +1,40 @@
-#1. 데이터
 import numpy as np
-x = np.array(range(1, 101))
-y = np.array(range(101, 201))
 
-from sklearn.model_selection import train_test_split #이름만 봐도 갈라질 것만 같은 느낌
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.4, shuffle = False)
-x_val, x_test, y_val, y_test = train_test_split(x_test,y_test, test_size=0.5, shuffle = False)
-print(x_test)
+#1. 데이터
+x = np.array(range(1,21))
+y = np.array(range(31,51))
 
+#2. 
+from sklearn.model_selection import train_test_split
+
+x1_train, x_test, y1_train, y_test, = train_test_split(x, y, train_size=0.7) 
+x2_train, x_val, y2_train, y_val = train_test_split(x1_train, y1_train, train_size=0.7)
+#3. 컴파일, 훈련
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-model = Sequential()
-# model.add(Dense(10, input_dim=1))
-model.add(Dense(10, input_shape=(1,)))
-model.add(Dense(7))
-model.add(Dense(5))
-model.add(Dense(1))
 
-#3. 컴파일 훈련
-model.compile(loss='mse', optimizer='adam',metrics=['mse'])
-model.fit(x_train, y_train, epochs=100, batch_size=1, validation_data=(x_val, y_val))
+print("x1_train : ", x1_train)
+print("x2_train : ", x2_train)
+print("x_test : ", x_test)
+print("x_val : ", x_val)
 
-#4. 예측
-mse = model.evaluate(x_test,y_test, batch_size=1)
-print("mse : ",mse)
+print(x_test.shape)
 
-y_predict = model.predict(x_test)
-print("y_predict : ",y_predict)
 
-from sklearn.metrics import mean_squared_error
-def RMSE(y_test, y_predict):
-    return np.sqrt(mean_squared_error(y_test,y_predict))
-print("RMSE : ",RMSE(y_test, y_predict))
+#4. 평가, 예측
+# loss = model.evaluate(x_test, y_test)
+# print("loss: ", loss)
 
-from sklearn.metrics import r2_score
-r2 = r2_score(y_test, y_predict)
+# y_pred = model.predict(x_test)
+# print("result : \n", y_pred)
 
-print("r2 : ",r2)
+#RMSE
+# from sklearn.metrics import mean_squared_error
+# def RMSE(y_test, y_pred):
+#     return np.sqrt(mean_squared_error(y_test, y_pred))
+# print("RMSE : ", RMSE(y_test, y_pred))
+
+# #R2
+# from sklearn.metrics import r2_score
+# r2 = r2_score(y_test, y_pred)
+# print("R2: ", r2)

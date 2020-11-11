@@ -1,40 +1,45 @@
-#1. 데이터
-import numpy as np
-x = np.array(range(1, 101))
-y = np.array(range(101, 201))
-print(x)
-x_train = x[:60]     #60개
-y_train = y[:60]
-x_test =  x[61:81]    #20개
-y_test =  y[61:81]
-x_val = x[20:40]
-y_val = y[20:40]
-#나머지 코드를 완성하시오.
-#2. 모델구성
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
+
+import numpy as np
+
+#1. 데이터
+x = np.array(range(1,101))
+y = np.array(range(101,201))
+
+x_train = x[:60] #60개 
+y_train = y[:60]
+
+x_val = x[60:80] #20개
+y_val = y[60:80] 
+
+x_test = x[80:] #20개
+y_test = y[80:]
+
+#2. 모델구성
 model = Sequential()
-model.add(Dense(30, input_dim = 1))
-model.add(Dense(500))
-model.add(Dense(10))
+model.add(Dense(30, input_dim=1))
+model.add(Dense(50))
+model.add(Dense(30))
+model.add(Dense(7))
 model.add(Dense(1))
 
-#3. 컴파일, 훈련 
-model.compile(loss='mse', optimizer='adam',metrics=['mse'])
-model.fit(x_train, y_train, epochs=100, batch_size=1, validation_data=(x_val, y_val))
+#3. 컴파일, 훈련
+model.compile(loss='mse', optimizer='adam') 
+model.fit(x_train, y_train, epochs=100, validation_data=(x_val, y_val)) 
 
-#4. 예측
-loss, mse = model.evaluate(x_test,y_test, batch_size=1)
-print("mse : ",mse)
+#4. 평가, 예측
+loss = model.evaluate(x_test, y_test)
+print("loss: ", loss)
 
-y_predict = model.predict(x_test)
-print(" y_predict: ",y_predict)
-
+y_pred = model.predict(x_test)
+print("result : \n", y_pred)
+#RMSE
 from sklearn.metrics import mean_squared_error
-def RMSE(y_test, y_predict):
-    return np.sqrt(mean_squared_error(y_test, y_predict))
-print("RMSE : ", RMSE(y_test, y_predict))
-
+def RMSE(y_test, y_pred):
+    return np.sqrt(mean_squared_error(y_test, y_pred))
+print("RMSE : ", RMSE(y_test, y_pred))
+#R2
 from sklearn.metrics import r2_score
-r2 = r2_score(y_test, y_predict)
-print("R2 : ",r2)
+r2 = r2_score(y_test, y_pred)
+print("r2: ", r2)
