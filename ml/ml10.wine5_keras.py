@@ -79,3 +79,24 @@ y_test_recovery = np.argmax(y_test[:10], axis=1)
 
 print("예측값 : ", y_predict)
 print("실제값 : ", y_test_recovery)
+
+import matplotlib.pyplot as plt
+plt.subplot(2,1,1) # 2장 중에 첫 번째
+plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
+plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
+plt.grid()
+plt.title('loss')
+plt.ylabel('loss')
+plt.xlabel('epochs')
+plt.legend(loc='upper right')
+
+plt.subplot(2,1,2) # 2장 중에 두 번째
+plt.plot(hist.history['accuracy'], marker='.', c='red')
+plt.plot(hist.history['val_accuracy'], marker='.', c='blue')
+plt.grid()
+plt.title('accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epochs')
+plt.legend(['accuracy', 'val_accuracy'])
+
+plt.show()

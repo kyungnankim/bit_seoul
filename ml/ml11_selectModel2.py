@@ -29,6 +29,13 @@ for (name, algorithm) in allAlgorithms:
         print(name, '의 정답률:', r2_score(y_test, y_pred))
     except:
         pass
+
+from sklearn.ensemble import GradientBoostingRegressor
+model2 = GradientBoostingRegressor()
+model2.fit(x_train, y_train)
+y_pred2 = model2.predict(x_test)
+print('GradientBoostingRegressor:', r2_score(y_test, y_pred2))
+
 '''
 ARDRegression 의 정답률: 0.7413660842736123
 AdaBoostRegressor 의 정답률: 0.8346412647550048
