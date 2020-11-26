@@ -83,8 +83,8 @@ for thresh in thresholds :
 
 # 3.
 x, y=load_boston(return_X_y=True)
-x_data1=x[:,:4]
-x_data2=x[:,5:]
+x_data1=x[:,:11]
+x_data2=x[:,12:]
 x=np.concatenate([x_data1, x_data2], axis=1)
 print(x.shape) #(506, 12)
 
