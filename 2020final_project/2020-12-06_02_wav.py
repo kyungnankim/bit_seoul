@@ -7,7 +7,7 @@ data_dir='./2020final_project/'
 data_pro='./2020fidown/'
 
 # y, sr = librosa.load(data_pro + 'nsynth-train/audio/bass_acoustic_000-030-127.wav')
-y, sr = librosa.load(data_pro + 'ptr/bass_electronic_001-031-127.wav')
+y, sr = librosa.load(data_pro + './2020fidown/ptr/bass_electronic_001-031-127.wav')
 
 fft = np.fft.fft(y)
 magnitude = np.abs(fft)
