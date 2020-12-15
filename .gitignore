@@ -21,6 +21,10 @@
 *.tar
 *.zip
  
+*.png
+*.jpg
+*.dat
+*.pkl
 # Logs and databases #
 ######################
 *.log
